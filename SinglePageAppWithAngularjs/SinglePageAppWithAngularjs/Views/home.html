@@ -1,0 +1,202 @@
+﻿<link rel="stylesheet" href="styles.css">
+
+
+<div class="row jumbotron" style="background-color:white">
+    <h1 class="text-center text-danger">Interviewees</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <input type="text" placeholder="type to filter here" class="input-lg form-control" ng-model="txtFilter" />
+            <br />
+            <br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <!--<div>Order by</div>
+            <select ng-model="orderProp">
+                <option value="firstname">Alphabetical</option>
+                <option value="frontend">Point</option>
+            </select>-->
+        </div>
+    </div>
+
+    <div class="row" style="width:250px; height:100px;">
+        <div class="col-md-15 col-md-offset-3">
+            <label style="font-size:12px">Add a new column</label>
+            <div>
+                <div class="pull-right">
+                    <button id="addButton"
+                            style="text-align:center"
+                            ng-click="addColumn()"
+                            class="btn btn-info form-control input-lg">
+                        Add
+                    </button>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <input id="newcolumn"
+                               name="newcolumn"
+                               type="text"
+                               ng-model="newcolumn"
+                               class="form-control input-lg"
+                               placeholder="enter a column name"
+                               style="font-size:12px" />
+                    </div>
+                </div>
+            </div>
+
+            <!--<label style="font-size:12px">Add a new column</label>
+    <input id="newcolumn"
+           name="newcolumn"
+           type="text"
+           ng-model="newcolumn"
+           class="form-control input-lg"
+           placeholder="enter a column name"
+           style="font-size:12px" />
+    <button id="addButton"
+            style="text-align:center"
+            ng-click="addColumn()"
+            class="btn btn-info form-control input-lg">
+        Add
+    </button>-->
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+
+                <div class="tableFixHead">
+                    <table class="table fixed_header">
+                        <thead>
+                            <tr>
+
+                                <th ng-click="sortData('firstname')">
+                                    Firstname <div ng-class="getSortClass('firstname')"></div>
+                                </th>
+
+                                <th ng-click="sortData('lastname')">
+                                    Lastname <div ng-class="getSortClass('lastname')"></div>
+                                </th>
+
+
+                                <th ng-click="sortData('email')">
+                                    Email <div ng-class="getSortClass('email')"></div>
+                                </th>
+
+
+                                <th ng-click="sortData('university')">
+                                    University <div ng-class="getSortClass('university')"></div>
+                                </th>
+
+                                <th ng-click="sortData('githublink')">
+                                    Github Link <div ng-class="getSortClass('githublink')"></div>
+                                </th>
+
+                                <th ng-click="sortData('bamboolink')">
+                                    Bamboo <div ng-class="getSortClass('bamboolink')"></div>
+                                </th>
+
+                                <th ng-click="sortData('backendnote')">
+                                    Backend <div ng-class="getSortClass('backendnote')"></div>
+                                </th>
+
+                                <th ng-click="sortData('frontend')">
+                                    Frontend <div ng-class="getSortClass('frontend')"></div>
+                                </th>
+
+                                <th ng-click="sortData('algorithms')">
+                                    Algorithms <div ng-class="getSortClass('algorithms')"></div>
+                                </th>
+
+                                <th ng-click="sortData('specialnote')">
+                                    Special notes <div ng-class="getSortClass('specialnote')"></div>
+                                </th>
+
+                                <th ng-repeat="c in cols">
+                                    {{c.columnname}}
+                                </th>
+
+
+                                <!--<th>
+                                Delete
+                            </th>
+
+                            <th>
+                                Edit
+                            </th>-->
+
+                            </tr>
+
+
+
+
+                        </thead>
+
+                        <tr ng-repeat="a in emps|filter:txtFilter|orderBy:sortColumn:reverseSort">
+
+
+                            <td>
+                                {{a.firstname}}
+                            </td>
+                            <td>
+                                {{a.lastname}}
+                            </td>
+                            <td>
+                                {{a.email}}
+                            </td>
+                            <td>
+                                {{a.university}}
+                            </td>
+                            <td>
+                                {{a.githublink}}
+                            </td>
+                            <td>
+                                {{a.bamboolink}}
+                            </td>
+                            <td>
+                                {{a.backendnote}}
+                            </td>
+                            <td>
+                                {{a.frontend}}
+                            </td>
+                            <td>
+                                {{a.algorithms}}
+                            </td>
+                            <td>
+                                {{a.specialnote}}
+                            </td>
+                            <td ng-repeat="column in cols">
+                                {{a.extranotes[$index].note}}
+                            </td>
+
+                            <td>
+                                <!--<a id="deleteButton" ng-click="deleteEmpById(a.id)">
+        Delete
+    </a>-->
+
+                                <button type="button" class="btn btn-default btn-sm" ng-click="deleteEmpById(a.id)">
+                                    <span class="glyphicon glyphicon-remove-sign"></span> Remove
+                                </button>
+
+                            </td>
+                            <td>
+                                <!--<a ng-href="#Edit/{{a.id}}">
+        Edit
+    </a>-->
+                                <button ng-href="#Edit/{{a.id}}" type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                </button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
