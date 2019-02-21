@@ -72,8 +72,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="demo.js" />
+    <Content Include="app.controller.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="main.js" />
     <Content Include="_index.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />
@@ -848,6 +849,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="webpack.config.js" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
