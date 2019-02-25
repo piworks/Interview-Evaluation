@@ -1,0 +1,3 @@
+npm install --save-dev webpack-cli
+npm install --global webpack
+npm install

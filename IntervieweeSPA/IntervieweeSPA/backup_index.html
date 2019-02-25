@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html ng-app="intervieweeApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Interviewee Evaluation</title>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="service.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-messages.js"></script>
+
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+
+    <script src="home-view/home-view.module.js"></script>
+    <script src="home-view/home-view.component.js"></script>
+
+    <script src="edit-view/edit-view.module.js"></script>
+    <script src="edit-view/edit-view.component.js"></script>
+
+    <script src="add-view/add-view.module.js"></script>
+    <script src="add-view/add-view.component.js"></script>
+
+
+
+</head>
+<body>
+
+    <div class="container">
+        <nav role="navigation" class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#!home">Home</a></li>
+                <li><a href="#!add">Add an interviewee!</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- this is where the views will be shown -->
+    <div ng-view>
+
+    </div>
+
+</body>
+</html>
