@@ -1,1 +1,1 @@
-﻿angular.module('homeView', []);
+﻿angular.module('homeView', ['ngRoute', 'IntervieweeService', 'ngMessages']);

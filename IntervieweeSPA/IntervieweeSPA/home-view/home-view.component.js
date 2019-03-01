@@ -2,8 +2,9 @@
     module('homeView').
     component('homeView', {
         templateUrl: 'home-view/home-view.template.html',
-        controller: ['$scope', '$route', 'EmpApi',
+        controller: ['$scope', '$route', 'EmpApi', 
             function HomeViewController($scope, $route, EmpApi) {
+
                 // for refreshing the page
                 var vm = this;
 

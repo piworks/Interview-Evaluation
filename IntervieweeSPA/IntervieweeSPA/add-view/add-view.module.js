@@ -1,1 +1,1 @@
-﻿angular.module('addView', []);
+﻿angular.module('addView', ['IntervieweeService', 'ngMessages']);

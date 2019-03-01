@@ -6,7 +6,7 @@ angular.
     function config($routeProvider) {
       $routeProvider.
         when('/home', {
-          template: '<home-view></home-view>'
+            template: '<home-view></home-view>'
         }).
         when('/edit/:id', {
             template: '<edit-view></edit-view>'
