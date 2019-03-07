@@ -8,6 +8,7 @@ describe('component test : add', function () {
     // add templates [from karma]
     beforeEach(module('templates'));
 
+    var $mockScope = {};
     var element;
     var scope;
     var $httpBackend;
@@ -38,21 +39,23 @@ describe('component test : add', function () {
             template = $compile(element)(scope);
         });
 
-        $rootScope.$digest();
-
+        $httpBackend.flush();
     }));
 
 
     // tests
 
     it('extra column http get', function () {
-        $httpBackend.expectGET('http://localhost:51275/api/ExtraColumn');
-
+        $httpBackend.expectGET('http://localhost:51275/api/ExtraColumn')
+            .respond(200, {
+                id: 3,
+                columnname: 'toefl'
+            });
+        
     });
 
     it('interviewees http get', function () {
-        $httpBackend.expectGET('http://localhost:51275/api/Interviewee');
-
+        $httpBackend.expectGET('http://localhost:51275/api/Interviewee');      
     });
 
     it('header text', function () {

@@ -8,6 +8,7 @@ module.exports = {
         path: __dirname,
         filename: "../app.bundle.js" //relative to root of the application
     },
+
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000

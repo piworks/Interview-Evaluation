@@ -8,6 +8,8 @@ describe('component test : home', function () {
     // add templates [from karma]
     beforeEach(module('templates'));
 
+    beforeEach(module('IntervieweeService'));
+
     var element;
     var scope;
     var $httpBackend;
@@ -54,6 +56,7 @@ describe('component test : home', function () {
         $httpBackend.expectGET('http://localhost:51275/api/Interviewee');
 
     });
+
 
     it('header text', function () {
         var title = element.find('h1');

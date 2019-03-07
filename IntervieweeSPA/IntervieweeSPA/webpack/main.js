@@ -1,10 +1,9 @@
+let bootstrap = require("../Scripts/bootstrap.js");
 let jquery = require("../Scripts/jquery-2.2.4.js");
 
 let angular = require("../Scripts/angular.js");
 let ngRoute = require("../Scripts/angular-route.js");
 let messages = require("../Scripts/angular-messages.js");
-
-let bootstrap = require("../Scripts/bootstrap.js");
 
 let appmodule = require("../app.module.js");
 let appconfig = require("../app.config.js");

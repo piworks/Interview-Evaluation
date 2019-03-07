@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -159,7 +159,7 @@ eval("﻿angular.\r\n    module('addView').\r\n    component('addView', {\r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("﻿angular.module('addView', []);\n\n//# sourceURL=webpack:///../add-view/add-view.module.js?");
+eval("﻿angular.module('addView', ['IntervieweeService', 'ngMessages']);\n\n//# sourceURL=webpack:///../add-view/add-view.module.js?");
 
 /***/ }),
 
@@ -171,7 +171,7 @@ eval("﻿angular.module('addView', []);\n\n//# sourceURL=webpack:///../add-view/
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("﻿\r\n\r\nangular.\r\n  module('intervieweeApp').\r\n  config(['$routeProvider',\r\n    function config($routeProvider) {\r\n      $routeProvider.\r\n        when('/home', {\r\n          template: '<home-view></home-view>'\r\n        }).\r\n        when('/edit/:id', {\r\n            template: '<edit-view></edit-view>'\r\n        }).\r\n        when('/add', {\r\n            template: '<add-view></add-view>'\r\n        }).\r\n        otherwise('/home');\r\n    }\r\n    ]);\r\n\r\n\n\n//# sourceURL=webpack:///../app.config.js?");
+eval("﻿\r\n\r\nangular.\r\n  module('intervieweeApp').\r\n  config(['$routeProvider',\r\n    function config($routeProvider) {\r\n      $routeProvider.\r\n        when('/home', {\r\n            template: '<home-view></home-view>'\r\n        }).\r\n        when('/edit/:id', {\r\n            template: '<edit-view></edit-view>'\r\n        }).\r\n        when('/add', {\r\n            template: '<add-view></add-view>'\r\n        }).\r\n        otherwise('/home');\r\n    }\r\n    ]);\r\n\r\n\n\n//# sourceURL=webpack:///../app.config.js?");
 
 /***/ }),
 
@@ -227,7 +227,7 @@ eval("﻿angular.\r\n    module('homeView').\r\n    component('homeView', {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("﻿angular.module('homeView', []);\n\n//# sourceURL=webpack:///../home-view/home-view.module.js?");
+eval("﻿angular.module('homeView', ['ngRoute', 'IntervieweeService', 'ngMessages']);\n\n//# sourceURL=webpack:///../home-view/home-view.module.js?");
 
 /***/ }),
 
@@ -249,7 +249,18 @@ eval("﻿var IntervieweeService = angular.module('IntervieweeService', ['ngMessa
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("let jquery = __webpack_require__(/*! ../Scripts/jquery-2.2.4.js */ \"../Scripts/jquery-2.2.4.js\");\r\n\r\nlet angular = __webpack_require__(/*! ../Scripts/angular.js */ \"../Scripts/angular.js\");\r\nlet ngRoute = __webpack_require__(/*! ../Scripts/angular-route.js */ \"../Scripts/angular-route.js\");\r\nlet messages = __webpack_require__(/*! ../Scripts/angular-messages.js */ \"../Scripts/angular-messages.js\");\r\n\r\nlet bootstrap = __webpack_require__(/*! ../Scripts/bootstrap.js */ \"../Scripts/bootstrap.js\");\r\n\r\nlet appmodule = __webpack_require__(/*! ../app.module.js */ \"../app.module.js\");\r\nlet appconfig = __webpack_require__(/*! ../app.config.js */ \"../app.config.js\");\r\n\r\nlet service = __webpack_require__(/*! ../service.js */ \"../service.js\");\r\n\r\nlet homemodule = __webpack_require__(/*! ../home-view/home-view.module.js */ \"../home-view/home-view.module.js\");\r\nlet homecomponent = __webpack_require__(/*! ../home-view/home-view.component.js */ \"../home-view/home-view.component.js\");\r\n\r\n\r\nlet editmodule = __webpack_require__(/*! ../edit-view/edit-view.module.js */ \"../edit-view/edit-view.module.js\");\r\nlet editcomponent = __webpack_require__(/*! ../edit-view/edit-view.component.js */ \"../edit-view/edit-view.component.js\");\r\n\r\nlet addmodule = __webpack_require__(/*! ../add-view/add-view.module.js */ \"../add-view/add-view.module.js\");\r\nlet addcomponent = __webpack_require__(/*! ../add-view/add-view.component.js */ \"../add-view/add-view.component.js\");\n\n//# sourceURL=webpack:///./main.js?");
+eval("let bootstrap = __webpack_require__(/*! ../Scripts/bootstrap.js */ \"../Scripts/bootstrap.js\");\r\nlet jquery = __webpack_require__(/*! ../Scripts/jquery-2.2.4.js */ \"../Scripts/jquery-2.2.4.js\");\r\n\r\nlet angular = __webpack_require__(/*! ../Scripts/angular.js */ \"../Scripts/angular.js\");\r\nlet ngRoute = __webpack_require__(/*! ../Scripts/angular-route.js */ \"../Scripts/angular-route.js\");\r\nlet messages = __webpack_require__(/*! ../Scripts/angular-messages.js */ \"../Scripts/angular-messages.js\");\r\n\r\nlet appmodule = __webpack_require__(/*! ../app.module.js */ \"../app.module.js\");\r\nlet appconfig = __webpack_require__(/*! ../app.config.js */ \"../app.config.js\");\r\n\r\nlet service = __webpack_require__(/*! ../service.js */ \"../service.js\");\r\n\r\nlet homemodule = __webpack_require__(/*! ../home-view/home-view.module.js */ \"../home-view/home-view.module.js\");\r\nlet homecomponent = __webpack_require__(/*! ../home-view/home-view.component.js */ \"../home-view/home-view.component.js\");\r\n\r\n\r\nlet editmodule = __webpack_require__(/*! ../edit-view/edit-view.module.js */ \"../edit-view/edit-view.module.js\");\r\nlet editcomponent = __webpack_require__(/*! ../edit-view/edit-view.component.js */ \"../edit-view/edit-view.component.js\");\r\n\r\nlet addmodule = __webpack_require__(/*! ../add-view/add-view.module.js */ \"../add-view/add-view.module.js\");\r\nlet addcomponent = __webpack_require__(/*! ../add-view/add-view.component.js */ \"../add-view/add-view.component.js\");\n\n//# sourceURL=webpack:///./main.js?");
+
+/***/ }),
+
+/***/ 0:
+/*!****************************************************!*\
+  !*** multi ./main.js ./../Scripts/jquery-2.2.4.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__(/*! ./main.js */\"./main.js\");\nmodule.exports = __webpack_require__(/*! ./../Scripts/jquery-2.2.4.js */\"../Scripts/jquery-2.2.4.js\");\n\n\n//# sourceURL=webpack:///multi_./main.js_./../Scripts/jquery-2.2.4.js?");
 
 /***/ })
 
