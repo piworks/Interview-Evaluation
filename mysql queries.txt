@@ -1,0 +1,44 @@
+create database interviewee
+
+
+
+
+CREATE TABLE extracolumn (
+    id int NOT NULL AUTO_INCREMENT,
+    columnname varchar(255),
+    PRIMARY KEY (id)
+);
+
+
+
+
+
+CREATE TABLE extranotes (
+    id int NOT NULL AUTO_INCREMENT,
+    intervieweeid int,
+    columnname varchar(255),
+    note varchar(255),
+    PRIMARY KEY (id)
+);
+
+
+
+
+
+CREATE TABLE interviewee (
+    id int NOT NULL AUTO_INCREMENT,
+    firstname varchar(255),
+    lastname varchar(255),
+    email varchar(255),
+    university varchar(255),
+    githublink varchar(255),
+    bamboolink varchar(255),
+    
+    backend int,
+    frontend int,
+    algorithms int,
+    
+    specialnote varchar(255),
+
+    PRIMARY KEY (id)
+);
