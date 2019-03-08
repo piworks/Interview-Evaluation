@@ -8,7 +8,11 @@ module.exports = {
         path: __dirname,
         filename: "../app.bundle.js" //relative to root of the application
     },
-
+    module:{
+        rules:[
+            { test: /\.css$/, loader: "style-loader!css-loader" }
+        ]
+    },
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000

@@ -8,34 +8,34 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using IntervieweeService.Models;
-
+using MySql.Data.MySqlClient;
 
 namespace IntervieweeService.Controllers
 {
     public class IntervieweeController : ApiController
     {
         private readonly String connectionString = 
-            ConfigurationManager.ConnectionStrings["SqlServerStr"].ConnectionString;
+            ConfigurationManager.ConnectionStrings["MySqlServerStr"].ConnectionString;
 
         [HttpGet]
         [ActionName("GetInterviewee")]
         public List<Interviewee> GetInterviewees()
         {
             List<Interviewee> listOfInterviewee = new List<Interviewee>();
-
+            Debug.WriteLine("get interviewee");
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-
-                    using (var cmd = new SqlCommand())
+                    Debug.WriteLine("connection is opened");
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "Select * from interviewee";
                         cmd.Connection = connection;
 
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -55,33 +55,38 @@ namespace IntervieweeService.Controllers
                             interviewee.specialnote = reader.GetValue(10).ToString();
 
                             // the notes for this interviewee
-                            using (var cmdNote = new SqlCommand())
+                            using (var connectionNote = new MySqlConnection(connectionString))
                             {
-                                cmdNote.CommandType = System.Data.CommandType.Text;
-                                cmdNote.CommandText = "Select * from extranotes";
-                                cmdNote.Connection = connection;
-
-                                SqlDataReader readerNote = cmdNote.ExecuteReader();
-
-                                while (readerNote.Read())
+                                connectionNote.Open();
+                                using (var cmdNote = new MySqlCommand())
                                 {
-                                    ExtraNote extraNote = new ExtraNote();
-                                    extraNote.id = Convert.ToInt32(readerNote.GetValue(0));
-                                    extraNote.intervieweeid = Convert.ToInt32(readerNote.GetValue(1));
-                                    extraNote.columnname = readerNote.GetValue(2).ToString();
-                                    extraNote.note = readerNote.GetValue(3).ToString();
+                                    cmdNote.CommandType = System.Data.CommandType.Text;
+                                    cmdNote.CommandText = "Select * from extranotes";
+                                    cmdNote.Connection = connectionNote;
 
-                                    // here we check whether the extra note is for this interviewee or not
-                                    if (interviewee.id == extraNote.intervieweeid)
+                                    MySqlDataReader readerNote = cmdNote.ExecuteReader();
+
+                                    while (readerNote.Read())
                                     {
-                                        interviewee.extranotes.Add(extraNote);
+                                        ExtraNote extraNote = new ExtraNote();
+                                        extraNote.id = Convert.ToInt32(readerNote.GetValue(0));
+                                        extraNote.intervieweeid = Convert.ToInt32(readerNote.GetValue(1));
+                                        extraNote.columnname = readerNote.GetValue(2).ToString();
+                                        extraNote.note = readerNote.GetValue(3).ToString();
+
+                                        // here we check whether the extra note is for this interviewee or not
+                                        if (interviewee.id == extraNote.intervieweeid)
+                                        {
+                                            interviewee.extranotes.Add(extraNote);
+                                        }
                                     }
+
+                                    readerNote.Close();
                                 }
-
-                                readerNote.Close();
                             }
+                            
 
-
+                            Debug.WriteLine(interviewee.firstname + " is added");
                             listOfInterviewee.Add(interviewee);
                         }
 
@@ -90,9 +95,10 @@ namespace IntervieweeService.Controllers
     
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
-                Console.WriteLine(ex.Message);
+
+                Debug.WriteLine(ex);
             }
 
             return listOfInterviewee;
@@ -106,17 +112,17 @@ namespace IntervieweeService.Controllers
 
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "Select * from interviewee where id = " + id;
                         cmd.Connection = connection;
 
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -136,39 +142,46 @@ namespace IntervieweeService.Controllers
                             interviewee.algorithms = Convert.ToInt32(reader.GetValue(9));
                             interviewee.specialnote = reader.GetValue(10).ToString();
 
+                            Debug.WriteLine(interviewee.firstname);
+
                             // the notes for this interviewee
-                            using (var cmdNote = new SqlCommand())
+                            using (var connectionNote = new MySqlConnection(connectionString))
                             {
-                                cmdNote.CommandType = System.Data.CommandType.Text;
-                                cmdNote.CommandText = "Select * from extranotes where intervieweeid = " + interviewee.id;
-                                cmdNote.Connection = connection;
-
-                                SqlDataReader readerNote = cmdNote.ExecuteReader();
-
-                                while (readerNote.Read())
+                                connectionNote.Open();
+                                using (var cmdNote = new MySqlCommand())
                                 {
-                                    ExtraNote extraNote = new ExtraNote();
-                                    extraNote.id = Convert.ToInt32(readerNote.GetValue(0));
-                                    extraNote.intervieweeid = Convert.ToInt32(readerNote.GetValue(1));
-                                    extraNote.columnname = readerNote.GetValue(2).ToString();
-                                    extraNote.note = readerNote.GetValue(3).ToString();
+                                    cmdNote.CommandType = System.Data.CommandType.Text;
+                                    cmdNote.CommandText = "Select * from extranotes where intervieweeid = " + interviewee.id;
+                                    cmdNote.Connection = connectionNote;
 
-                                    // here we check whether the extra note is for this interviewee or not
-                                    if (interviewee.id == extraNote.intervieweeid)
+                                    MySqlDataReader readerNote = cmdNote.ExecuteReader();
+
+                                    while (readerNote.Read())
                                     {
-                                        interviewee.extranotes.Add(extraNote);
-                                    }
-                                }
+                                        ExtraNote extraNote = new ExtraNote();
+                                        extraNote.id = Convert.ToInt32(readerNote.GetValue(0));
+                                        extraNote.intervieweeid = Convert.ToInt32(readerNote.GetValue(1));
+                                        extraNote.columnname = readerNote.GetValue(2).ToString();
+                                        extraNote.note = readerNote.GetValue(3).ToString();
 
-                                readerNote.Close();
-                            }                      
+                                        // here we check whether the extra note is for this interviewee or not
+                                        if (interviewee.id == extraNote.intervieweeid)
+                                        {
+                                            interviewee.extranotes.Add(extraNote);
+                                        }
+                                    }
+
+                                    readerNote.Close();
+                                }
+                            }
+                              
                         }
 
                         reader.Close();
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
             }
@@ -182,17 +195,17 @@ namespace IntervieweeService.Controllers
         {     
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "insert into interviewee (firstname, lastname, email, university" +
-                            ", githublink, bamboolink, backendnote, frontend, algorithms, specialnote) " +
+                            ", githublink, bamboolink, backend, frontend, algorithms, specialnote) " +
                             "values (@firstname, @lastname, @email, @university" +
-                            ", @githublink, @bamboolink, @backendnote, @frontend, @algorithms, @specialnote)";
+                            ", @githublink, @bamboolink, @backend, @frontend, @algorithms, @specialnote)";
 
                         Debug.WriteLine(cmd.CommandText);
 
@@ -204,7 +217,7 @@ namespace IntervieweeService.Controllers
                         cmd.Parameters.AddWithValue("@university", interviewee.university);
                         cmd.Parameters.AddWithValue("@githublink", interviewee.githublink);
                         cmd.Parameters.AddWithValue("@bamboolink", interviewee.bamboolink);
-                        cmd.Parameters.AddWithValue("@backendnote", interviewee.backendnote);
+                        cmd.Parameters.AddWithValue("@backend", interviewee.backendnote);
                         cmd.Parameters.AddWithValue("@frontend", interviewee.frontend);
                         cmd.Parameters.AddWithValue("@algorithms", interviewee.algorithms);
                         cmd.Parameters.AddWithValue("@specialnote", interviewee.specialnote);
@@ -213,7 +226,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
 
                 Debug.WriteLine(ex.Message);
@@ -226,11 +239,11 @@ namespace IntervieweeService.Controllers
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "update interviewee set " +
@@ -240,7 +253,7 @@ namespace IntervieweeService.Controllers
                             "university = @university ," +
                             "githublink = @githublink ," +
                             "bamboolink = @bamboolink ," +
-                            "backendnote = @backendnote ," +
+                            "backend = @backend ," +
                             "frontend = @frontend ," +
                             "algorithms = @algorithms ," +
                             "specialnote = @specialnote " +
@@ -254,7 +267,7 @@ namespace IntervieweeService.Controllers
                         cmd.Parameters.AddWithValue("@university", interviewee.university);
                         cmd.Parameters.AddWithValue("@githublink", interviewee.githublink);
                         cmd.Parameters.AddWithValue("@bamboolink", interviewee.bamboolink);
-                        cmd.Parameters.AddWithValue("@backendnote", interviewee.backendnote);
+                        cmd.Parameters.AddWithValue("@backend", interviewee.backendnote);
                         cmd.Parameters.AddWithValue("@frontend", interviewee.frontend);
                         cmd.Parameters.AddWithValue("@algorithms", interviewee.algorithms);
                         cmd.Parameters.AddWithValue("@specialnote", interviewee.specialnote);
@@ -263,7 +276,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
 
                 Debug.WriteLine(ex.Message);
@@ -276,11 +289,11 @@ namespace IntervieweeService.Controllers
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     // deletes the interviewee
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "delete from interviewee where id = " + id;
@@ -289,7 +302,7 @@ namespace IntervieweeService.Controllers
                     }
 
                     //deletes extra notes of the interviewee
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "delete from extranotes where intervieweeid = " + id;
@@ -298,7 +311,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
             }

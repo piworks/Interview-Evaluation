@@ -8,14 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using IntervieweeService.Models;
-
+using MySql.Data.MySqlClient;
 
 namespace IntervieweeService.Controllers
 {
     public class ExtraNoteController : ApiController
     {
         private readonly String connectionString = 
-            ConfigurationManager.ConnectionStrings["SqlServerStr"].ConnectionString;
+            ConfigurationManager.ConnectionStrings["MySqlServerStr"].ConnectionString;
 
         [HttpGet]
         [ActionName("GetExtraNoteById")]
@@ -25,17 +25,17 @@ namespace IntervieweeService.Controllers
 
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "Select * from extranotes";
                         cmd.Connection = connection;
 
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -53,7 +53,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -70,17 +70,17 @@ namespace IntervieweeService.Controllers
 
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "Select * from interviewee order by id DESC";
                         cmd.Connection = connection;
 
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -92,18 +92,18 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         foreach(var extraNote in extraNotes)
                         {
@@ -132,12 +132,13 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
             }
         }
         
+
 
         [HttpPut]
         [ActionName("PutExtraNote")]
@@ -146,20 +147,20 @@ namespace IntervieweeService.Controllers
             List<int> listOfIds = new List<int>();
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
                     //getting
                     if(extraNotes.Count > 0)
                     {
-                        using (var cmd = new SqlCommand())
+                        using (var cmd = new MySqlCommand())
                         {
                             cmd.CommandType = System.Data.CommandType.Text;
                             cmd.CommandText = "Select * from extranotes where intervieweeid = " + extraNotes[0].intervieweeid;
                             cmd.Connection = connection;
 
-                            SqlDataReader reader = cmd.ExecuteReader();
+                            MySqlDataReader reader = cmd.ExecuteReader();
 
                             while (reader.Read())
                             {
@@ -169,7 +170,7 @@ namespace IntervieweeService.Controllers
                                 extraNote.intervieweeid = Convert.ToInt32(reader.GetValue(1));
                                 extraNote.columnname = reader.GetValue(2).ToString();
                                 extraNote.note = reader.GetValue(3).ToString();
-
+                                
                                 listOfIds.Add(extraNote.id);
                             }
 
@@ -178,7 +179,7 @@ namespace IntervieweeService.Controllers
                     }
 
                     // editing
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         int index = 0;
                         foreach (var extraNote in extraNotes)
@@ -206,7 +207,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
             }

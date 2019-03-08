@@ -8,13 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using IntervieweeService.Models;
+using MySql.Data.MySqlClient;
 
 namespace IntervieweeService.Controllers
 {
     public class ExtraColumnController : ApiController
     {
         private readonly String connectionString = 
-            ConfigurationManager.ConnectionStrings["SqlServerStr"].ConnectionString;
+            ConfigurationManager.ConnectionStrings["MySqlServerStr"].ConnectionString;
 
         [HttpGet]
         [ActionName("GetExtraTable")]
@@ -24,17 +25,17 @@ namespace IntervieweeService.Controllers
 
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "Select * from extracolumn";
                         cmd.Connection = connection;
 
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        MySqlDataReader reader = cmd.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -50,12 +51,39 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
             return listOfExtraColumns;
+        }
+
+        [HttpDelete]
+        [ActionName("DeleteExtraColumn")]
+        public void DeleteExtraColumn(int id)
+        {
+            try
+            {
+                using(var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using(var cmd = new MySqlCommand())
+                    {
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.CommandText = "Delete from table extracolumn where id = (@id)";
+                        cmd.Connection = connection;
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch(MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+           
         }
 
         [HttpPost]
@@ -64,11 +92,11 @@ namespace IntervieweeService.Controllers
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    using (var cmd = new SqlCommand())
+                    using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.CommandText = "insert into extracolumn (columnname) values (@columnname)";
@@ -78,7 +106,7 @@ namespace IntervieweeService.Controllers
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (MySqlException ex)
             {
                 Debug.WriteLine(ex.Message);
             }

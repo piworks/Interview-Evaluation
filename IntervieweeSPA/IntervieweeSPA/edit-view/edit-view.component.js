@@ -80,7 +80,7 @@
                     EmpApi.EditInterviewee(empToEdit, $scope.extraColumnNotes)
                         .then(function (response) {
                             alert("user edit");
-
+     
                             // if it has no extra notes previously, we need to call POST
                             if (outerScope.listOfExtraNoteIds.length == 0) {
                                 EmpApi.AddExtraNotes($scope.extraColumnNotes)

@@ -1,8 +1,16 @@
 ﻿.intervieweeform {
+    width: 400px;
     overflow-y: auto;
     overflow-x: auto;
-    height: 700px;
-    margin-top: 100px;
+    height: 500px;
+    font-size: 12px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.intervieweeform input {
+    width: 350px;
+    height: 4px;
 }
 
 .form-group {
@@ -17,7 +25,7 @@
     overflow-y: auto;
     overflow-x: auto;
     font-size: 12px;
-    height: 500px;
+    height: 300px;
     border-collapse: separate;
     display: block;
     /*border: solid cadetblue 1px;
@@ -25,26 +33,24 @@
     /*background-color: gainsboro;*/
 }
 
-    .tableFixHead th {
-        position: sticky;
-        top: 0;
-        cursor: pointer;
-        /*background-color:cadetblue;*/
-    }
+.tableFixHead th {
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    /*background-color:cadetblue;*/
+}
 
 /* Just common table stuff. Really. */
 table {
     border-collapse: collapse;
     width: auto;
     height: 100px;
+    font-size: 10px;
 }
 
 th, td {
-    padding: 8px 16px;
-}
-
-th {
-    /*background: #eee;*/
+    word-wrap: break-word;
+    padding: 2px 2px;
 }
 
 .grid-container {
