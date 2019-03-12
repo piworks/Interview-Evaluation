@@ -10,11 +10,11 @@
 
 .intervieweeform input {
     width: 350px;
-    height: 4px;
+    height: 40px;
 }
 
 .form-group {
-    margin-top: 10px;
+    margin-top: 2px;
 }
 
 .container {
@@ -34,10 +34,11 @@
 }
 
 .tableFixHead th {
+    opacity: 1.0;
     position: sticky;
     top: 0;
     cursor: pointer;
-    /*background-color:cadetblue;*/
+    background-color:white;
 }
 
 /* Just common table stuff. Really. */

@@ -147,11 +147,12 @@ namespace IntervieweeService.Controllers
             List<int> listOfIds = new List<int>();
             try
             {
+
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    //getting
+                    // getting the extra columns
                     if(extraNotes.Count > 0)
                     {
                         using (var cmd = new MySqlCommand())
@@ -178,10 +179,83 @@ namespace IntervieweeService.Controllers
                         }
                     }
 
+                    // so the extra column for this interviewee is new
+                    // if interviewee is created without this extra column we will create
+                    // extrar columns for this interviewee with placeholder values
+                    if(listOfIds.Count() < extraNotes.Count())
+                    {
+                        int difference = extraNotes.Count() - listOfIds.Count();
+
+                        // how many extra column the interviewee lack
+                        for(int i = 0; i < difference; ++i)
+                        {
+                            // add a new extranote
+                            int intervieweeId = extraNotes[0].intervieweeid;
+
+                            // Here I need to add a new extra notes to this particular interviewee of which is the object to be edited                           
+                            using (var connectionExtraNote = new MySqlConnection(connectionString))
+                            {
+                                connectionExtraNote.Open();
+
+                                using (var cmdExtraNote = new MySqlCommand())
+                                {
+                                    cmdExtraNote.CommandType = System.Data.CommandType.Text;
+                                    cmdExtraNote.CommandText = "insert into extranotes (intervieweeid, columnname, note) " +
+                                        "values (@intervieweeid, @columnname, @note)";
+
+                                    cmdExtraNote.Connection = connection;
+
+
+                                    cmdExtraNote.Parameters.AddWithValue("@intervieweeid", intervieweeId);
+                                    cmdExtraNote.Parameters.AddWithValue("@columnname", "columnname");
+                                    cmdExtraNote.Parameters.AddWithValue("@note", "--"); // placeholder value untill it is edited
+
+                                    Debug.WriteLine("placeholder added for interviewee witd id of " + intervieweeId);
+                                    cmdExtraNote.ExecuteNonQuery();
+
+
+                                }
+                            }
+
+                        }
+
+
+                        // now we have as much extra columns as needed to go further into this operation
+                        // we need to fill the list of ids again, and before doing this, we msut empty the lsit first
+                        listOfIds.Clear();
+                        using (var cmd = new MySqlCommand())
+                        {
+                            cmd.CommandType = System.Data.CommandType.Text;
+                            cmd.CommandText = "Select * from extranotes where intervieweeid = " + extraNotes[0].intervieweeid;
+                            cmd.Connection = connection;
+
+                            MySqlDataReader reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                ExtraNote extraNote = new ExtraNote();
+
+                                extraNote.id = Convert.ToInt32(reader.GetValue(0));
+                                extraNote.intervieweeid = Convert.ToInt32(reader.GetValue(1));
+                                extraNote.columnname = reader.GetValue(2).ToString();
+                                extraNote.note = reader.GetValue(3).ToString();
+
+                                listOfIds.Add(extraNote.id);
+                            }
+
+                            cmd.Parameters.Clear();
+                            reader.Close();
+                        }
+
+                    }
+
+                    // now we have the listOfIds
+
                     // editing
                     using (var cmd = new MySqlCommand())
                     {
                         int index = 0;
+
                         foreach (var extraNote in extraNotes)
                         {
                             int noteIndex = listOfIds.ElementAt(index);

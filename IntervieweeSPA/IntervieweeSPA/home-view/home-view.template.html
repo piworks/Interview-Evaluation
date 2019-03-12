@@ -5,14 +5,14 @@
 
 
     <div class="row">
-        <div class="col-md-9 col-md-offset-0">
+        <div class="col-md-9 col-md-offset-1">
             <input type="text" placeholder="type to filter here" class="input-lg form-control" ng-model="txtFilter" />
 
         </div>
     </div>
 
-    <!--<div class="row" style="width:250px; height:100px;">
-        <div class="col-md-9 col-md-offset-0">
+    <div class="row" style="width:250px; height:100px;">
+        <div class="col-md-9 col-md-offset-2">
             <label style="font-size:12px">Add a new column</label>
             <div>
                 <div class="pull-right">
@@ -37,10 +37,10 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 
     <div class="row">
-        <div class="col-md-9 col-md-offset-0">
+        <div class="col-md-9 col-md-offset-1">
 
             <div class="tableFixHead">
                 <table class="table fixed_header">
@@ -91,6 +91,14 @@
 
                             <th ng-repeat="c in cols">
                                 {{c.columnname}}
+                            </th>
+
+                            <th>
+                                Remove
+                            </th>
+
+                            <th>
+                                Edit
                             </th>
 
                         </tr>

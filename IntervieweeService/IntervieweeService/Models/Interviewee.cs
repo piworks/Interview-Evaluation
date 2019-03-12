@@ -18,7 +18,7 @@ namespace IntervieweeService.Models
             public int? frontend { get; set; }
             public int? algorithms { get; set; }
             public string specialnote { get; set; }
-
+           
             public List<ExtraNote> extranotes { get; set; }
         }
 }

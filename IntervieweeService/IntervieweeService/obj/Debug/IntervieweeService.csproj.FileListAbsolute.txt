@@ -50,9 +50,11 @@ C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\roslyn\VBCS
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Antlr3.Runtime.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\EntityFramework.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\EntityFramework.SqlServer.dll
+C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Google.Protobuf.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Microsoft.Web.Infrastructure.dll
+C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\MySql.Data.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Newtonsoft.Json.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\System.Net.Http.Formatting.dll
@@ -70,6 +72,8 @@ C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\System.Web.
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\WebGrease.dll
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\EntityFramework.xml
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\EntityFramework.SqlServer.xml
+C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Google.Protobuf.xml
+C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\MySql.Data.xml
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\System.Web.Http.Cors.xml
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\Newtonsoft.Json.xml
 C:\Projects\IntervieweeApp\IntervieweeService\IntervieweeService\bin\System.Net.Http.Formatting.xml

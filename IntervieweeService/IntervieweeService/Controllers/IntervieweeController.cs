@@ -308,6 +308,7 @@ namespace IntervieweeService.Controllers
                         cmd.CommandText = "delete from extranotes where intervieweeid = " + id;
                         cmd.Connection = connection;
                         cmd.ExecuteNonQuery();
+                        
                     }
                 }
             }
@@ -315,6 +316,7 @@ namespace IntervieweeService.Controllers
             {
                 Debug.WriteLine(ex.Message);
             }
+           
         }
 
 

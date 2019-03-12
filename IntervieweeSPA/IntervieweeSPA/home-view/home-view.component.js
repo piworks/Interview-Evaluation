@@ -43,6 +43,7 @@
 
 
                 // adds the ability to sort the table by clicking the desired column
+                // once clicked, it will switch between descending and ascending order
                 $scope.sortColumn = "name";
                 $scope.reverseSort = false;
                 $scope.sortData = function (column) {
