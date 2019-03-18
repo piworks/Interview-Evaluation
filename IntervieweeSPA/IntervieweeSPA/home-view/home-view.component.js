@@ -32,13 +32,9 @@
                     };
 
                     EmpApi.AddExtraColumns(colToAdd)
-                        .success(function (response) {
-                            alert("column added");
-                        }).
-                        error(function (response) {
-                            alert("error in adding");
-                        }
-                        );
+                        .then(function (response) {
+                            alert("note edited");
+                        });;
                 }
 
 

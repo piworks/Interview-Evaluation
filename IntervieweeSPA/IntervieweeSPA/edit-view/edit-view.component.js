@@ -49,6 +49,26 @@
                             'intervieweeid': $routeParams.id,
                             'columnname': 'columnname',
                             'note': 'note'
+                        }, {
+                            'intervieweeid': $routeParams.id,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': $routeParams.id,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': $routeParams.id,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': $routeParams.id,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': $routeParams.id,
+                            'columnname': 'columnname',
+                            'note': 'note'
                         }
                     ];
 
@@ -59,7 +79,7 @@
 
 
                     // to remove the unnecessary items
-                    for (var i = 0; i < 3 - numberOfExtraColumns; ++i) {
+                    for (var i = 0; i < 8 - numberOfExtraColumns; ++i) {
                         $scope.extraColumnNotes.splice(-1, 1);
                     }
 
@@ -77,10 +97,17 @@
                         'specialnote': $scope.specialnote
                     };
 
-                    EmpApi.EditInterviewee(empToEdit, $scope.extraColumnNotes)
+                    EmpApi.EditInterviewee(empToEdit, $scope.extraColumnNotes, $scope.cols)
                         .then(function (response) {
                             alert("user edit");
-     
+
+                            // extra column operation names for extranotes
+                            var length = $scope.cols.length;
+                            for (var i = 0; i < length; ++i) {
+                                // console.log($scope.cols[i].columnname);
+                                $scope.extraColumnNotes[i].columnname = $scope.cols[i].columnname;
+                            }
+
                             // if it has no extra notes previously, we need to call POST
                             if (outerScope.listOfExtraNoteIds.length == 0) {
                                 EmpApi.AddExtraNotes($scope.extraColumnNotes)
@@ -111,6 +138,21 @@
                 // initially empmty
                 $scope.choices = [
                     {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
                         columnname: 'columnname',
                         note: 'note'
                     }, {

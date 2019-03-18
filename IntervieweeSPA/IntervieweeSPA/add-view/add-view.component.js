@@ -20,6 +20,26 @@
                             'intervieweeid': -1,
                             'columnname': 'columnname',
                             'note': 'note'
+                        }, {
+                            'intervieweeid': -1,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': -1,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': -1,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': -1,
+                            'columnname': 'columnname',
+                            'note': 'note'
+                        }, {
+                            'intervieweeid': -1,
+                            'columnname': 'columnname',
+                            'note': 'note'
                         }
                     ];
 
@@ -30,7 +50,7 @@
 
 
                     // to remove the unnecessary items
-                    for (var i = 0; i < 3 - numberOfExtraColumns; ++i) {
+                    for (var i = 0; i < 8 - numberOfExtraColumns; ++i) {
                         $scope.extraColumnNotes.splice(-1, 1);
                     }
 
@@ -48,9 +68,16 @@
                         'specialnote': $scope.specialnote
                     };
 
-                    EmpApi.AddInterviewee(empToAdd, $scope.extraColumnNotes)
+                    EmpApi.AddInterviewee(empToAdd, $scope.extraColumnNotes, $scope.cols)
                         .then(function (response) {
                             alert("user edited");
+
+                            // extra column operation names for extranotes
+                            var length = $scope.cols.length;
+                            for (var i = 0; i < length; ++i) {
+                                // console.log($scope.cols[i].columnname);
+                                $scope.extraColumnNotes[i].columnname = $scope.cols[i].columnname;
+                            }
 
                             // add the note
                             EmpApi.AddExtraNotes($scope.extraColumnNotes)
@@ -75,6 +102,21 @@
                 // initially empmty
                 $scope.choices = [
                     {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
+                        columnname: 'columnname',
+                        note: 'note'
+                    }, {
                         columnname: 'columnname',
                         note: 'note'
                     }, {

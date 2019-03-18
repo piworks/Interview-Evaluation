@@ -1,13 +1,14 @@
-﻿<h2 class="text-center text-danger">Edit an interviewee</h2>
-<br />
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            New Interviewee
+        </h4>
+    </div>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form class="intervieweeform" name="intervieweeFrom" novalidate>
-
-            <fieldset>
+    <div class="panel-body">
+        <form name="intervieweeFrom">
+            <fieldset class="formFieldsetPersonalDetails col-md-6">
                 <legend> Personal Details </legend>
                 <!-- firstname field -->
                 <div class="form-group">
@@ -64,6 +65,7 @@
 
 
 
+
                 <!-- university field -->
                 <div class="form-group">
                     <label>University</label>
@@ -105,7 +107,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="formFieldsetPoints col-md-6">
                 <legend>Points</legend>
                 <!-- backendnote field -->
                 <div class="form-group">
@@ -221,21 +223,26 @@
                            placeholder="note"
                            value="{{c.note}}">
                 </div>
-
             </fieldset>
-
-            <!-- Add button -->
-            <div id="divButton" title="">
-                <button id="addButton"
-                        ng-disabled="intervieweeFrom.email.$invalid ||
-                                        intervieweeFrom.frontend.$invalid ||
-                                        intervieweeFrom.backendnote.$invalid ||
-                                        intervieweeFrom.algorithms.$invalid"
-                        ng-click="editEmp(cols.length)"
-                        class="btn btn-info form-control input-lg">
-                    Save
-                </button>
-            </div>
         </form>
+    </div>
+
+    <div class="panel-footer clearfix">
+        <!-- Cancel / goes back to home page -->
+        <div class="pull-right">
+            <a class="btn btn-link btn-primary" href="#!home">
+                Cancel
+            </a>
+        </div>
+
+        <!-- Add button -->
+        <div class="pull-right">
+            <button class="btn btn-primary"
+                    ng-disabled="intervieweeFrom.$invalid"
+                    ng-click="editEmp(cols.length)">
+                Add
+            </button>
+        </div>
+
     </div>
 </div>

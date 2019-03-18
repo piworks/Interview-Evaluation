@@ -1,8 +1,8 @@
 ﻿var IntervieweeService = angular.module('IntervieweeService', ['ngMessages']);
 
 IntervieweeService.factory('EmpApi', function ($http) {
-    var urlBase = "http://localhost:51275/api";
-
+    var urlBase = "http://automationtest/evaluation-service/api";
+    //var urlBase = " http://localhost:51275//api";
     var EmpApi = {};
 
     // EXTRA NOTE

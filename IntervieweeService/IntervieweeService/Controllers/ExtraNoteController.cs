@@ -177,21 +177,18 @@ namespace IntervieweeService.Controllers
 
                             reader.Close();
                         }
-                    }
+                    }                 
 
                     // so the extra column for this interviewee is new
                     // if interviewee is created without this extra column we will create
                     // extrar columns for this interviewee with placeholder values
-                    if(listOfIds.Count() < extraNotes.Count())
+                    if (listOfIds.Count() < extraNotes.Count())
                     {
                         int difference = extraNotes.Count() - listOfIds.Count();
 
                         // how many extra column the interviewee lack
                         for(int i = 0; i < difference; ++i)
-                        {
-                            // add a new extranote
-                            int intervieweeId = extraNotes[0].intervieweeid;
-
+                        {                   
                             // Here I need to add a new extra notes to this particular interviewee of which is the object to be edited                           
                             using (var connectionExtraNote = new MySqlConnection(connectionString))
                             {
@@ -205,9 +202,11 @@ namespace IntervieweeService.Controllers
 
                                     cmdExtraNote.Connection = connection;
 
+                                    int intervieweeId = extraNotes[0].intervieweeid;
+                                    string columnname = extraNotes[0].columnname;
 
                                     cmdExtraNote.Parameters.AddWithValue("@intervieweeid", intervieweeId);
-                                    cmdExtraNote.Parameters.AddWithValue("@columnname", "columnname");
+                                    cmdExtraNote.Parameters.AddWithValue("@columnname", columnname);
                                     cmdExtraNote.Parameters.AddWithValue("@note", "--"); // placeholder value untill it is edited
 
                                     Debug.WriteLine("placeholder added for interviewee witd id of " + intervieweeId);
