@@ -158,7 +158,8 @@ namespace IntervieweeService.Controllers
                         using (var cmd = new MySqlCommand())
                         {
                             cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.CommandText = "Select * from extranotes where intervieweeid = " + extraNotes[0].intervieweeid;
+                            cmd.CommandText = "Select * from extranotes where intervieweeid = @intervieweeid";
+							cmd.Parameters.AddWithValue("@intervieweeid", extraNotes[0].intervieweeid);
                             cmd.Connection = connection;
 
                             MySqlDataReader reader = cmd.ExecuteReader();
@@ -225,7 +226,8 @@ namespace IntervieweeService.Controllers
                         using (var cmd = new MySqlCommand())
                         {
                             cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.CommandText = "Select * from extranotes where intervieweeid = " + extraNotes[0].intervieweeid;
+							cmd.CommandText = "Select * from extranotes where intervieweeid = @intervieweeid";
+							cmd.Parameters.AddWithValue("@intervieweeid", extraNotes[0].intervieweeid);
                             cmd.Connection = connection;
 
                             MySqlDataReader reader = cmd.ExecuteReader();
