@@ -119,7 +119,8 @@ namespace IntervieweeService.Controllers
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = "Select * from interviewee where id = " + id;
+                        cmd.CommandText = "Select * from interviewee where id = @id";
+						cmd.Parameters.AddWithValue("@id", id);
                         cmd.Connection = connection;
 
                         MySqlDataReader reader = cmd.ExecuteReader();
@@ -151,7 +152,8 @@ namespace IntervieweeService.Controllers
                                 using (var cmdNote = new MySqlCommand())
                                 {
                                     cmdNote.CommandType = System.Data.CommandType.Text;
-                                    cmdNote.CommandText = "Select * from extranotes where intervieweeid = " + interviewee.id;
+									cmdNote.CommandText = "Select * from extranotes where intervieweeid = @intervieweeid";
+									cmdNote.Parameters.AddWithValue("@intervieweeid", interviewee.id);
                                     cmdNote.Connection = connectionNote;
 
                                     MySqlDataReader readerNote = cmdNote.ExecuteReader();
@@ -296,7 +298,8 @@ namespace IntervieweeService.Controllers
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = "delete from interviewee where id = " + id;
+                        cmd.CommandText = "delete from interviewee where id = @id";
+						cmd.Parameters.AddWithValue("@id", id);
                         cmd.Connection = connection;
                         cmd.ExecuteNonQuery();
                     }
@@ -305,7 +308,8 @@ namespace IntervieweeService.Controllers
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.CommandType = System.Data.CommandType.Text;
-                        cmd.CommandText = "delete from extranotes where intervieweeid = " + id;
+                        cmd.CommandText = "delete from extranotes where intervieweeid = @id";
+						cmd.Parameters.AddWithValue("@id", id);
                         cmd.Connection = connection;
                         cmd.ExecuteNonQuery();
                         
